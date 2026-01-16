@@ -339,11 +339,11 @@ updateshim() {
         if ! git -C "/root/Aurora" pull origin "$branch" 2>&1 | center; then
             echo "git pull failed, recloning" | center
             rm -rf /root/Aurora
-            git clone --branch="$branch" https://github.com/AerialiteLabs/Aurora /root/Aurora 2>&1 | center || return
+            git clone --branch="2.0" https://github.com/clippyricer/Skiduora /root/Aurora 2>&1 | center || return
         fi
     else
         rm -rf /root/Aurora
-        git clone --branch="$branch" https://github.com/AerialiteLabs/Aurora /root/Aurora 2>&1 | center || return
+        git clone --branch="2.0" https://github.com/clippyricer/Skiduora /root/Aurora 2>&1 | center || return
     fi
 
     updated=0
