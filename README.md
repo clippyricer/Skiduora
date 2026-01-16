@@ -32,7 +32,7 @@ apk add curl wget bash e2fsprogs gptfdisk sgdisk cgpt rsync
 
 ## Building
 ```bash
-git clone --recursive https://github.com/AerialiteLabs/Aurora.git
+git clone --recursive https://github.com/clippyricer/Skiduora.git
 cd Aurora
 ```
 Run the following command with a **raw** shim and the architecture of the Chromebook you have.
