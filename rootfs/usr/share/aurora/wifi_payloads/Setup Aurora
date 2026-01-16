@@ -1,0 +1,16 @@
+#!/bin/bash
+# Sets up aurora with needed packages and dependencies
+sudo apk update && sudo apk upgrade
+sudo apk add e2fsprogs e2fsprogs-extra
+sudo apk add coreutils man-db partx sgdisk file
+sudo apk add python3 python3-dev py3-setuptools py-distutils-extra
+sudo apk add protoc gzip py3-pip zlib cryptsetup
+sudo apk add lvm2 lvm2-extra lvm2-lockd lvm2-libs
+python3 -m venv install
+source install/bin/activate
+pip3 install pipx
+pip3 install Pillow
+pip3 install image-tools
+pip3 install protobuf
+pip3 install six
+pip install --upgrade pip
