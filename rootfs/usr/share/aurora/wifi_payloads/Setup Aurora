@@ -5,7 +5,7 @@ echo "Updating packages"
 sudo apk update && sudo apk upgrade >/dev/null
 echo "Installing needed packages and deps"
 sudo apk add e2fsprogs e2fsprogs-extra >/dev/null
-sudo apk add coreutils man-db partx sgdisk file >/dev/null
+sudo apk add coreutils man-db partx sgdisk file rsync cgpt curl wget gptfdisk util-linux bash zsh libfdisk>/dev/null
 sudo apk add protoc gzip py3-pip zlib cryptsetup >/dev/null
 echo "Installing python and pip"
 sudo apk add python3 python3-dev py3-setuptools py-distutils-extra >/dev/null
