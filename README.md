@@ -76,7 +76,15 @@ You can then either download recovery images or shims in Aurora itself, or put t
 # Uploading Files via another computer
 1. Use AFT on page 2 (recommended)
 2. Use a Linux computer with **ROOT ACCESS**<br></br>
-ChromeOS Files will NOT WORK! Use VT2 or Crostini USB passthrough if you only have a Chromebook.
+- Mount your flash drive
+```
+sudo mount /dev/sdX4 /mnt
+```
+- Copy your files
+```
+sudo cp /path_to_file_on_device /mnt/path_to_wherever_on_aurora
+```
+ChromeOS Files app will NOT WORK! Use VT2 or Crostini USB passthrough if you only have a Chromebook.
 
 # Credits
 - [Sophia](https://github.com/soap-phia) - Lead developer of Aurora, Got Wifi
