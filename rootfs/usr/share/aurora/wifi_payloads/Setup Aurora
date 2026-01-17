@@ -1,18 +1,51 @@
 #!/bin/bash
 # Sets up aurora with needed packages and dependencies
 # TODO: Make code cleaner, add color, add auto shim download
-echo "Updating packages"
-sudo apk update && sudo apk upgrade >/dev/null
-echo "Installing needed packages and deps"
+echo -e "\e[32mUpdating packages..."
+sudo apk update && sudo apk upgrade >/dev/null 2>&1
+echo -e "\e[32mInstalling needed packages and deps..."
 sudo apk add e2fsprogs e2fsprogs-extra >/dev/null
 sudo apk add coreutils man-db partx sgdisk file rsync cgpt curl wget gptfdisk util-linux bash zsh libfdisk >/dev/null
 sudo apk add protoc gzip py3-pip zlib cryptsetup >/dev/null
 sudo apk add make cmake neovim vim >/dev/null
-echo "Installing python and pip"
+echo -e "\e[32mInstalling python and pip..."
 sudo apk add python3 python3-dev py3-setuptools py-distutils-extra >/dev/null
-echo "Installing lvm tools"
+echo -e "\e[32mInstalling lvm tools"
 sudo apk add lvm2 lvm2-extra lvm2-lockd lvm2-libs >/dev/null
-echo "Installing pip packages"
+echo -e "\e[32mInstalling fonts..."
+sudo apk add font-noto-all
+mkdir -p /usr/share/fonts/noto
+fc-cache -fv
+apk add fontconfig
+
+# Create the system-wide font configuration file
+cat <<EOF > /etc/fonts/local.conf
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+  <alias>
+    <family>monospace</family>
+    <prefer>
+      <family>Noto Sans Mono</family>
+    </prefer>
+  </alias>
+
+  <match target="pattern">
+    <test name="family" qual="any">
+      <string>monospace</string>
+    </test>
+    <edit name="size" mode="assign">
+      <double>11</double>
+    </edit>
+  </match>
+</config>
+EOF
+
+# Refresh the font cache
+fc-cache -fv
+
+echo -e "\e[32mDefault monospace font set to Noto Sans Mono at 11pt."
+echo -e "\e[32mInstalling pip packages..."
 python3 -m venv install >/dev/null
 source install/bin/activate >/dev/null
 pip3 install pipx >/dev/null
