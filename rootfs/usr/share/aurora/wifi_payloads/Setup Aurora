@@ -7,11 +7,13 @@ echo -e "\e[32mInstalling needed packages and deps..."
 sudo apk add e2fsprogs e2fsprogs-extra >/dev/null
 sudo apk add coreutils man-db partx sgdisk file rsync cgpt curl wget gptfdisk util-linux bash zsh libfdisk >/dev/null
 sudo apk add protoc gzip py3-pip zlib cryptsetup >/dev/null
-sudo apk add make cmake neovim vim >/dev/null
+sudo apk add make cmake neovim vim shadow >/dev/null
 echo -e "\e[32mInstalling python and pip..."
 sudo apk add python3 python3-dev py3-setuptools py-distutils-extra >/dev/null
 echo -e "\e[32mInstalling lvm tools"
 sudo apk add lvm2 lvm2-extra lvm2-lockd lvm2-libs >/dev/null
+echo -e "\e[32mMaking zsh default shell..."
+chsh -s /bin/zsh   
 echo -e "\e[32mInstalling fonts..."
 sudo apk add font-noto-all
 mkdir -p /usr/share/fonts/noto
@@ -54,4 +56,7 @@ pip3 install image-tools >/dev/null
 pip3 install protobuf >/dev/null
 pip3 install six >/devnull
 pip install --upgrade pip >/dev/null
+echo -e "\e[32mInstalling PowerLevel10k theme"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 clear
