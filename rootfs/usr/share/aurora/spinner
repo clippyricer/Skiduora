@@ -1,0 +1,38 @@
+#!/bin/bash
+
+spinner() {
+    local pid=$1
+    local delay=0.2
+    local spinstr='|/-\'
+    
+    # Capture start time
+    local start_time=$SECONDS
+    
+    # Hide cursor
+    tput civis 
+
+    while kill -0 "$pid" 2>/dev/null; do
+        local temp=${spinstr#?}
+        printf "\e[0;36m [%c] " "$spinstr"
+        local spinstr=$temp${spinstr%"$temp"}
+        sleep $delay
+        printf "\b\b\b\b\b" # Clears the "[x] "
+    done
+
+    # Calculate total time
+    local total_seconds=$(( SECONDS - start_time ))
+    
+    # Convert to minutes and seconds
+    local m=$(( total_seconds / 60 ))
+    local s=$(( total_seconds % 60 ))
+
+    # Restore cursor
+    tput cnorm
+
+    # Logic to print either "1m 10s" or just "10s"
+    if [ $m -gt 0 ]; then
+        echo -e "\e[1;32mDone in ${m}m ${s}s!\e[0m"
+    else
+        echo -e "\e[1;32mDone in ${s}s!\e[0m"
+    fi
+}
