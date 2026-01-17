@@ -2,7 +2,7 @@
 # Sets up aurora with needed packages and dependencies
 # TODO: add auto shim download
 
-source ./usr/share/aurora/functions
+. /usr/share/aurora/spinner
 
 echo -e "\e[1;36mUpdating packages..."
 sudo apk update >/dev/null 2>&1 && sudo apk upgrade >/dev/null 2>&1 &
