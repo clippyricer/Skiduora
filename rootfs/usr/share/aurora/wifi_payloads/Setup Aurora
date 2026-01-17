@@ -1,16 +1,23 @@
 #!/bin/bash
 # Sets up aurora with needed packages and dependencies
-sudo apk update && sudo apk upgrade
-sudo apk add e2fsprogs e2fsprogs-extra
-sudo apk add coreutils man-db partx sgdisk file
-sudo apk add python3 python3-dev py3-setuptools py-distutils-extra
-sudo apk add protoc gzip py3-pip zlib cryptsetup
-sudo apk add lvm2 lvm2-extra lvm2-lockd lvm2-libs
-python3 -m venv install
-source install/bin/activate
-pip3 install pipx
-pip3 install Pillow
-pip3 install image-tools
-pip3 install protobuf
-pip3 install six
-pip install --upgrade pip
+# TODO: Make code cleaner, add color, add auto shim download
+echo "Updating packages"
+sudo apk update && sudo apk upgrade >/dev/null
+echo "Installing needed packages and deps"
+sudo apk add e2fsprogs e2fsprogs-extra >/dev/null
+sudo apk add coreutils man-db partx sgdisk file >/dev/null
+sudo apk add protoc gzip py3-pip zlib cryptsetup >/dev/null
+echo "Installing python and pip"
+sudo apk add python3 python3-dev py3-setuptools py-distutils-extra >/dev/null
+echo "Installing lvm tools"
+sudo apk add lvm2 lvm2-extra lvm2-lockd lvm2-libs >/dev/null
+echo "Installing pip packages"
+python3 -m venv install >/dev/null
+source install/bin/activate >/dev/null
+pip3 install pipx >/dev/null
+pip3 install Pillow >/dev/null
+pip3 install image-tools >/dev/null
+pip3 install protobuf >/dev/null
+pip3 install six >/devnull
+pip install --upgrade pip >/dev/null
+clear
