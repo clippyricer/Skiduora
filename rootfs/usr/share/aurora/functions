@@ -613,8 +613,86 @@ setup() {
     stty -echo
 }
 
-testhello() {
-	echo -e "\e[32mHello, world!"
-	sleep 5
-	clear
+spinner() {
+    local pid=$1
+    local delay=0.2
+    local spinstr='|/-\'
+    
+    # Capture start time
+    local start_time=$SECONDS
+    
+    # Hide cursor
+    tput civis 
+
+    while kill -0 "$pid" 2>/dev/null; do
+        local temp=${spinstr#?}
+        printf "\e[0;36m [%c] " "$spinstr"
+        local spinstr=$temp${spinstr%"$temp"}
+        sleep $delay
+        printf "\b\b\b\b\b" # Clears the "[x] "
+    done
+
+    # Calculate total time
+    local total_seconds=$(( SECONDS - start_time ))
+    
+    # Convert to minutes and seconds
+    local m=$(( total_seconds / 60 ))
+    local s=$(( total_seconds % 60 ))
+
+    # Restore cursor
+    tput cnorm
+
+    # Logic to print either "1m 10s" or just "10s"
+    if [ $m -gt 0 ]; then
+        echo -e "\e[1;32mDone in ${m}m ${s}s!\e[0m"
+    else
+        echo -e "\e[1;32mDone in ${s}s!\e[0m"
+    fi
+}
+
+install_pkgs() {
+  echo -e "\e[1;36mUpdating packages..."
+  sudo apk update >/dev/null 2>&1 && sudo apk upgrade >/dev/null 2>&1 &
+  spinner $!
+
+  echo -e "\e[1;36mInstalling needed packages and deps..."
+  {
+
+    sudo apk add e2fsprogs e2fsprogs-extra >/dev/null
+    sudo apk add coreutils man-db partx sgdisk file rsync cgpt curl wget gptfdisk util-linux bash libfdisk >/dev/null
+    sudo apk add protoc gzip py3-pip zlib cryptsetup >/dev/null
+    sudo apk add make cmake neovim vim >/dev/null
+
+  } &
+
+  spinner $!
+
+  echo -e "\e[1;36mInstalling python and pip..."
+  sudo apk add python3 python3-dev py3-setuptools py-distutils-extra >/dev/null &
+
+  spinner $!
+
+  echo -e "\e[1;36mInstalling lvm tools"
+  sudo apk add lvm2 lvm2-extra lvm2-lockd lvm2-libs >/dev/null &
+
+  spinner $!
+
+  echo -e "\e[1;36mInstalling pip packages..."
+
+  {
+
+    python3 -m venv install >/dev/null
+    source install/bin/activate >/dev/null
+    pip3 install pipx >/dev/null
+    pip3 install Pillow >/dev/null
+    pip3 install image-tools >/dev/null
+    pip3 install protobuf >/dev/null
+    pip3 install six >/devnull
+    pip install --upgrade pip >/dev/null
+  
+  } &
+
+  spinner $!
+
+  sleep 2
 }
