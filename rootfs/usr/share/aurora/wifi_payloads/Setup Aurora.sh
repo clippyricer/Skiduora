@@ -28,6 +28,7 @@ sudo apk add lvm2 lvm2-extra lvm2-lockd lvm2-libs >/dev/null &
 spinner $!
 
 echo -e "\e[1;36mInstalling pip packages..."
+
 {
 
   python3 -m venv install >/dev/null
@@ -40,6 +41,5 @@ echo -e "\e[1;36mInstalling pip packages..."
   pip install --upgrade pip >/dev/null
 
 } &
-
 spinner $!
-clear
+sleep 3
