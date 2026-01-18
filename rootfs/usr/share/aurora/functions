@@ -612,3 +612,9 @@ setup() {
     tput civis
     stty -echo
 }
+
+testhello() {
+	echo -e "\e[32mHello, world!"
+	sleep 5
+	clear
+}
