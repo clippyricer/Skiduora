@@ -28,7 +28,7 @@ downloadrawshim() {
     basebuildshim="$aroot/build/.$board_name.bin"
     if [ ! -f "$basebuildshim" ]; then
         echo "Downloading Raw Shim for $board_name [ https://github.com/AerialiteLabs/sh1mmer/releases/download/v1.0.0/${board_name}.bin ]"
-        wget -q --show-progress "https://github.com/AerialiteLabs/sh1mmer/releases/download/v1.0.0/${board_name}.bin" -O "$basebuildshim"
+        wget "https://github.com/AerialiteLabs/sh1mmer/releases/download/v1.0.0/${board_name}.bin" -O "$basebuildshim"
     fi
 }
 
@@ -88,7 +88,7 @@ aurorabuildenv-create() {
     if [ "${buildenvname}" = "alpine" ]; then
         if [ ! -e "${aroot}/build/env/${buildenvname}/etc/.exists" ]; then
             alpinebuild="$aroot/build/env/alpine"
-            wget -q --show-progress "https://dl-cdn.alpinelinux.org/alpine/v3.22/releases/$(uname -m)/alpine-minirootfs-3.22.0-$(uname -m).tar.gz" -O alpine-minirootfs.tar.gz
+            wget "https://dl-cdn.alpinelinux.org/alpine/v3.22/releases/$(uname -m)/alpine-minirootfs-3.22.0-$(uname -m).tar.gz" -O alpine-minirootfs.tar.gz
             tar -xf alpine-minirootfs.tar.gz -C "$alpinebuild"
             rm -f "$alpinebuild/sbin/init"
             rm -f alpine-minirootfs.tar.gz
@@ -149,7 +149,7 @@ EOF
     if [ "${buildenvname}" = "arch" ]; then
         if [ ! -e "${aroot}/build/env/${buildenvname}/etc/.exists" ]; then
             archbuild="$aroot/build/env/arch"
-            wget -q --show-progress https://raw.githubusercontent.com/tokland/arch-bootstrap/master/arch-bootstrap.sh -O arch-bootstrap.sh
+            wget https://raw.githubusercontent.com/tokland/arch-bootstrap/master/arch-bootstrap.sh -O arch-bootstrap.sh
             chmod +x arch-bootstrap.sh
             ./arch-bootstrap.sh "$archbuild"
             touch "$archbuild/etc/.exists"
