@@ -3,6 +3,7 @@
 # TODO: add auto shim download
 
 . /usr/share/aurora/spinner
+. /usr/share/aurora/functions
 
 echo -e "\e[1;36mUpdating packages..."
 sudo apk update >/dev/null 2>&1 && sudo apk upgrade >/dev/null 2>&1 &
@@ -43,3 +44,5 @@ echo -e "\e[1;36mInstalling pip packages..."
 } &
 spinner $!
 sleep 3
+
+testhello
