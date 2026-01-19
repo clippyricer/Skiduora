@@ -1,7 +1,12 @@
 #/bin/bash
 # Sets up aurora with needed packages and dependencies
 # TODO: add auto shim download + choice menu
-#
+
 . /usr/share/aurora/functions
 
+GREEN='\033[1;32m'
+BL='\033[1;36m'
+NC='\033[0m'
+
 install_pkgs
+dl_reco_image
