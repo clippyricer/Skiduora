@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if $(expr $(cgpt show $intdis -i 2 -P) > $(cgpt show $intdis -i 4 -P)); then
+  echo kern-a
+else
+  echo kern-b
+fi

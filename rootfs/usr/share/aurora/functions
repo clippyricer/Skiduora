@@ -644,9 +644,9 @@ spinner() {
 
     # Logic to print either "1m 10s" or just "10s"
     if [ $m -gt 0 ]; then
-        echo -e "\e[1;32mDone in ${m}m ${s}s!\e[0m"
+        echo -e "\e[1;32mDone in ${m}m ${s}s!\e[0m \n"
     else
-        echo -e "\e[1;32mDone in ${s}s!\e[0m"
+        echo -e "\e[1;32mDone in ${s}s!\e[0m \n"
     fi
 }
 
@@ -694,7 +694,6 @@ install_pkgs() {
 
   spinner $!
 
-  sleep 2
 }
 
 dl_reco_image() {
