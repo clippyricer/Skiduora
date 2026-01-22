@@ -698,12 +698,12 @@ install_pkgs() {
 }
 
 dl_reco_image() {
-  read -p "\e[1;36mEnter your board name: \e[0m" board
+  read -p "Enter your board name: " board
   echo -e "\e[1;32mInstalling ${board} v139 recovery image]"
-  if [$board == nissa]; then
+  if [ $board == nissa ]; then
     wget -P /usr/share/aurora/images/recovery/ https://dl.google.com/dl/edgedl/chromeos/recovery/chromeos_16328.65.0_nissa_recovery_stable-channel_NissaMPKeys-v58.bin.zip -O v139.bin
     spinner $!
-  elif [$board == octopus]; then
+  elif [ $board == octopus ]; then
     wget -p /usr/share/aurora/images/recovery/ https://dl.google.com/dl/edgedl/chromeos/recovery/chromeos_16328.65.0_octopus_recovery_stable-channel_OctopusMPKeys-v37.bin.zip -O v139.bin
   fi
 }
