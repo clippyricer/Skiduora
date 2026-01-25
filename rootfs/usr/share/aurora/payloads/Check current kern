@@ -1,7 +1,11 @@
 #!/bin/bash
 
-if $(expr $(cgpt show $intdis -i 2 -P) > $(cgpt show $intdis -i 4 -P)); then
-  echo kern-a
+. /usr/share/aurora/functions
+
+get_partitions
+
+if $(expr $(cgpt show $cros_drive -i 2 -P) > $(cgpt show $cros_drive -i 4 -P)); then
+  echo -e "\e[1;36mYou are booting CrOS off \e[1;32m KERN-A"
 else
-  echo kern-b
+  echo -e "\e[1;36mYou are booting CrOS off \e[1;32m KERN-B"
 fi
