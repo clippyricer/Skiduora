@@ -9,4 +9,6 @@ BL='\033[1;36m'
 NC='\033[0m'
 
 install_pkgs
+sleep 1
 dl_reco_image
+sleep 1
