@@ -10,5 +10,11 @@ NC='\033[0m'
 
 install_pkgs
 sleep 1
+
 dl_reco_image
 sleep 1
+
+printf "\033]image:file=/root/.img/bannana.xcf;scale=2\a"
+sleep 3
+clear
+
